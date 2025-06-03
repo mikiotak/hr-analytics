@@ -28,7 +28,7 @@ sns.set(style="white")
 corr = data.corr()
 
 # Generate a mask for the upper triangle
-mask = np.zeros_like(corr, dtype=np.bool)
+mask = np.zeros_like(corr, dtype=bool)
 mask[np.triu_indices_from(mask)] = True
 
 # Set up the matplotlib figure
@@ -99,15 +99,19 @@ key_employees.describe()
 # In[135]:
 
 #lost key employees
-lost_key_employees = key_employees.loc[data['left']==1]
+lost_key_employees = key_employees.loc[key_employees['left'] == 1]
 lost_key_employees.describe()
 
 
 # In[151]:
 
-print "Number of key employees: ", len(key_employees)
-print "Number of lost key employees: ", len(lost_key_employees)
-print "Percentage of lost key employees: ", round((float(len(lost_key_employees))/float(len(key_employees))*100),2),"%"
+print("Number of key employees: ", len(key_employees))
+print("Number of lost key employees: ", len(lost_key_employees))
+print(
+    "Percentage of lost key employees: ",
+    round((float(len(lost_key_employees)) / float(len(key_employees)) * 100), 2),
+    "%",
+)
 
 
 # In[152]:
@@ -132,7 +136,7 @@ sns.set(style="white")
 corr = leaving_performers.corr()
 
 # Generate a mask for the upper triangle
-mask = np.zeros_like(corr, dtype=np.bool)
+mask = np.zeros_like(corr, dtype=bool)
 mask[np.triu_indices_from(mask)] = True
 
 # Set up the matplotlib figure
@@ -163,7 +167,7 @@ sns.set(style="white")
 corr = satisfied_employees.corr()
 
 # Generate a mask for the upper triangle
-mask = np.zeros_like(corr, dtype=np.bool)
+mask = np.zeros_like(corr, dtype=bool)
 mask[np.triu_indices_from(mask)] = True
 
 # Set up the matplotlib figure
