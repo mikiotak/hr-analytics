@@ -18,10 +18,10 @@ leave_df = pd.read_csv('../data/raw_data.csv')
 col_names = leave_df.columns.tolist()
 
 #show some basic output
-print "Column names:"
-print col_names
+print("Column names:")
+print(col_names)
 
-print "\nSample data:"
+print("\nSample data:")
 leave_df.head(6)
 
 
@@ -44,14 +44,14 @@ le_sales.fit(leave_feat_space["department"])
 leave_feat_space["department"] = le_sales.transform(leave_feat_space.loc[:,('department')])
 
 # transforme the whole feature space into a matrix
-X = leave_feat_space.as_matrix().astype(np.float)
+X = leave_feat_space.values.astype(float)
 
 # standardize all features
 scaler = preprocessing.StandardScaler()
 X = scaler.fit_transform(X)
 
-print "Feature space holds %d observations and %d features" % X.shape
-print "Unique target labels:", np.unique(y)
+print("Feature space holds %d observations and %d features" % X.shape)
+print("Unique target labels:", np.unique(y))
 
 
 # In[4]:
@@ -80,12 +80,12 @@ def accuracy(y, predicted):
     # NumPy interprets True and False as 1. and 0.
     return metrics.accuracy_score(y, predicted)
 
-print "Support vector machines:"
-print "%.3f" % accuracy(y, run_cv(X,y,SVC, method='predict'))
-print "Random forest:"
-print "%.3f" % accuracy(y, run_cv(X,y,RF, method='predict'))
-print "K-nearest-neighbors:"
-print "%.3f" % accuracy(y, run_cv(X,y,KNN, method='predict'))
+print("Support vector machines:")
+print("%.3f" % accuracy(y, run_cv(X, y, SVC, method='predict')))
+print("Random forest:")
+print("%.3f" % accuracy(y, run_cv(X, y, RF, method='predict')))
+print("K-nearest-neighbors:")
+print("%.3f" % accuracy(y, run_cv(X, y, KNN, method='predict')))
 
 
 # In[6]:
@@ -103,7 +103,7 @@ confusion_matrices = [
 ]
 
 # show confusion matrix values
-print confusion_matrices
+print(confusion_matrices)
 
 
 # In[7]:
@@ -138,7 +138,7 @@ counts = pd.value_counts(pred_leave)
 true_prob = {}
 for prob in counts.index:
     true_prob[prob] = np.mean(is_leave[pred_leave == prob])
-    true_prob = pd.Series(true_prob)
+true_prob = pd.Series(true_prob)
 
 # pandas-fu
 counts = pd.concat([counts,true_prob], axis=1).reset_index()
